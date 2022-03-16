@@ -72,7 +72,6 @@ spect, stimes, sfreqs = multitaper_spectrogram(data, Fs, frequency_range, time_b
 
 
 #It is very important to zscore the power
-spect = spect.T
 power = (spect-spect.mean(axis=0))/spect.std(axis=0)
 power = power.T
 

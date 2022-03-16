@@ -76,7 +76,6 @@ for T in range(T1, T2+1, 5):
     
     
     #It is very important to zscore the power
-    spect = spect.T
     power = (spect-spect.mean(axis=0))/spect.std(axis=0)
     power = power.T
     

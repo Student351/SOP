@@ -49,7 +49,7 @@ If necessary, we detect ripples here
 '''
 import pynacollada as pyna
 rip_ep, rip_tsd = pyna.eeg_processing.detect_oscillatory_events(
-                                            lfp = dlfp,
+                                            lfp = lfpEp,
                                             epoch = ep,
                                             freq_band = (100,300),
                                             thres_band = (1, 10),
@@ -89,4 +89,20 @@ spect, stimes, sfreqs = multitaper_spectrogram(data, Fs, frequency_range, time_b
                            min_nfft, detrend_opt, multiprocess=False, cpus=False, plot_on = True, verbose = True)
 
 from multitaper_spectrogram_python import nanpow2db
-spect = nanpow2db(spect)
+spect = nanpow2db(spect).T
+
+
+#Plot the spectrogram
+import librosa
+import matplotlib.pyplot as plt
+tt = stimes.A.ravel()
+ff = sfreqs.A.ravel()
+plt.figure(1, figsize=(10, 5))
+librosa.display.specshow(spect, x_axis='time', y_axis='linear',
+                          x_coords=tt, y_coords=ff, shading='auto',
+                          cmap="jet")
+plt.colorbar(label='Power (dB)')
+plt.xlabel("Time (HH:MM:SS)")
+plt.ylabel("Frequency (Hz)")
+plt.vlines(rip_tsd.index.values-[startT], ymin=25, ymax=200, colors='k', linestyles='solid')
+plt.show()
