@@ -1,6 +1,6 @@
 # SOP
 '''
-The files under folder "SOPPY" is the Main part.
+The files under folder "soppy" is the Main part.
 The metod of HD decoding is from "pynapple": https://github.com/PeyracheLab/pynapple
 And many other things in the code also bases on "pynapple" and "pynacollada": https://github.com/PeyracheLab/pynacollada
 '''
